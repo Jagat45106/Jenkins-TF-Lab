@@ -42,7 +42,7 @@ pipeline {
         stage('Terraform Apply') {
             when {
                 allOf {
-                    expression { params.TERRAFORM_ACTION == 'plan' }
+                    expression { params.TERRAFORM_ACTION == 'apply' }
                     expression { params.ACCOUNT == 'dev' }
                 }
             }
@@ -59,7 +59,7 @@ pipeline {
         stage('Terraform Destroy') {
              when {
                 allOf {
-                    expression { params.TERRAFORM_ACTION == 'plan' }
+                    expression { params.TERRAFORM_ACTION == 'apply' }
                     expression { params.ACCOUNT == 'dev' }
                 }
             }
