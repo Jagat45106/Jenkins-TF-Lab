@@ -30,11 +30,13 @@ pipeline {
                 }
             }
             steps {
-                sh '''
+                dir('dev') {
+                    sh '''
                     echo "Running terraform plan..."
                     terraform init -no-color
                     terraform plan -no-color
-                '''
+                    '''
+                }
             }
         }
         stage('Terraform Apply') {
@@ -45,11 +47,13 @@ pipeline {
                 }
             }
             steps {
-                sh '''
+                dir('dev'){
+                    sh '''
                     echo "Running terraform apply..."
                     terraform init -no-color
                     terraform apply -auto-approve -no-color
-                '''
+                    '''
+                }
             }
         }
         stage('Terraform Destroy') {
@@ -60,11 +64,13 @@ pipeline {
                 }
             }
             steps {
-                sh '''
+                dir('dev'){
+                    sh '''
                     echo "Running terraform destroy..."
                     terraform init -no-color
                     terraform destroy -auto-approve -no-color
-                '''
+                    '''
+                }
             }
         }
     }
