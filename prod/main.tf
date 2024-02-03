@@ -16,11 +16,11 @@ terraform {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket = "PROD-my-tf-test-bucket-jagat"
+  bucket = "prod-my-tf-test-bucket-jagat"
 
   tags = {
-    Name        = "dev-my-tf-test-bucket-jagat"
-    Environment = "PROD"
+    Name        = "prod-tf-test-bucket-jagat"
+    Environment = "prod"
   }
 }
 

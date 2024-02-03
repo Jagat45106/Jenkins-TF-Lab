@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "example" {
 
   tags = {
     Name        = "dev-my-tf-test-bucket-jagat"
-    Environment = "Dev"
+    Environment = "dev"
   }
 }
 
