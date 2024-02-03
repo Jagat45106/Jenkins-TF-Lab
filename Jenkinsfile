@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Terraform Plan') {
             when {
-                allof {
+                allOf {
                     expression { params.TERRAFORM_ACTION == 'plan' }
                     expression { params.ACCOUNT == 'dev' }
                 }
@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Terraform Apply') {
             when {
-                allof {
+                allOf {
                     expression { params.TERRAFORM_ACTION == 'plan' }
                     expression { params.ACCOUNT == 'dev' }
                 }
@@ -54,7 +54,7 @@ pipeline {
         }
         stage('Terraform Destroy') {
              when {
-                allof {
+                allOf {
                     expression { params.TERRAFORM_ACTION == 'plan' }
                     expression { params.ACCOUNT == 'dev' }
                 }
