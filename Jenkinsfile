@@ -26,7 +26,10 @@ pipeline {
             when {
                 allOf {
                     expression { params.TERRAFORM_ACTION == 'plan' }
-                    expression { params.ACCOUNT == 'dev' }
+                }
+                any0f {
+                      expression { params.ACCOUNT == 'dev' }
+                      expression { params.ACCOUNT == 'prod' }
                 }
             }
             steps {
