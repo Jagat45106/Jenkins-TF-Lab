@@ -43,13 +43,15 @@ pipeline {
         }
         stage('Terraform Apply') {
             when {
-                allOf {
-                    expression { params.TERRAFORM_ACTION == 'apply' }
-                    expression { params.ACCOUNT == 'dev' }
+                expression { params.TERRAFORM_ACTION == 'apply' }
+
+                anyOf {
+                      expression { params.ACCOUNT == 'dev' }
+                      expression { params.ACCOUNT == 'prod' }
                 }
             }
             steps {
-                dir('dev'){
+                dir(params.ACCOUNT){
                     sh '''
                     echo "Running terraform apply..."
                     terraform init -no-color
@@ -59,14 +61,16 @@ pipeline {
             }
         }
         stage('Terraform Destroy') {
-             when {
-                allOf {
-                    expression { params.TERRAFORM_ACTION == 'destroy' }
-                    expression { params.ACCOUNT == 'dev' }
+            when {
+                expression { params.TERRAFORM_ACTION == 'destroy' }
+
+                anyOf {
+                      expression { params.ACCOUNT == 'dev' }
+                      expression { params.ACCOUNT == 'prod' }
                 }
             }
             steps {
-                dir('dev'){
+                dir(params.ACCOUNT){
                     sh '''
                     echo "Running terraform destroy..."
                     terraform init -no-color
