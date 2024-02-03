@@ -24,9 +24,8 @@ pipeline {
         }
         stage('Terraform Plan') {
             when {
-                allOf {
-                    expression { params.TERRAFORM_ACTION == 'plan' }
-                }
+                expression { params.TERRAFORM_ACTION == 'plan' }
+
                 anyOf {
                       expression { params.ACCOUNT == 'dev' }
                       expression { params.ACCOUNT == 'prod' }
