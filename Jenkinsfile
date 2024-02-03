@@ -24,7 +24,10 @@ pipeline {
         }
         stage('Terraform Plan') {
             when {
-                expression { params.TERRAFORM_ACTION == 'plan' }
+                allof {
+                    expression { params.TERRAFORM_ACTION == 'plan' }
+                    expression { params.ACCOUNT == 'dev' }
+                }
             }
             steps {
                 sh '''
@@ -36,7 +39,10 @@ pipeline {
         }
         stage('Terraform Apply') {
             when {
-                expression { params.TERRAFORM_ACTION == 'apply' }
+                allof {
+                    expression { params.TERRAFORM_ACTION == 'plan' }
+                    expression { params.ACCOUNT == 'dev' }
+                }
             }
             steps {
                 sh '''
@@ -47,8 +53,11 @@ pipeline {
             }
         }
         stage('Terraform Destroy') {
-            when {
-                expression { params.TERRAFORM_ACTION == 'destroy' }
+             when {
+                allof {
+                    expression { params.TERRAFORM_ACTION == 'plan' }
+                    expression { params.ACCOUNT == 'dev' }
+                }
             }
             steps {
                 sh '''
