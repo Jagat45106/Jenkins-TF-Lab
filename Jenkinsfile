@@ -27,7 +27,7 @@ pipeline {
                 allOf {
                     expression { params.TERRAFORM_ACTION == 'plan' }
                 }
-                any0f {
+                anyOf {
                       expression { params.ACCOUNT == 'dev' }
                       expression { params.ACCOUNT == 'prod' }
                 }
