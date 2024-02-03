@@ -30,7 +30,7 @@ pipeline {
                 }
             }
             steps {
-                dir('dev') {
+                dir(params.ACCOUNT) {
                     sh '''
                     echo "Running terraform plan..."
                     terraform init -no-color
@@ -59,7 +59,7 @@ pipeline {
         stage('Terraform Destroy') {
              when {
                 allOf {
-                    expression { params.TERRAFORM_ACTION == 'apply' }
+                    expression { params.TERRAFORM_ACTION == 'destroy' }
                     expression { params.ACCOUNT == 'dev' }
                 }
             }
