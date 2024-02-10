@@ -31,7 +31,7 @@ pipeline {
             }
             post {
                 failure {
-                    error("Failed in 'Print Build Number' stage")
+                    error("Failed in 'Setting AWS Credential' stage")
                 }
             }
         }
