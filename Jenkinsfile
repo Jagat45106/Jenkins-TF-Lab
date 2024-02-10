@@ -29,19 +29,9 @@ pipeline {
         }
         stage('Setting AWS Credential') {
             steps {
-                script { 
-                    if (params.ACCOUNT == 'dev') {
-                        env.ACCOUNT_ID = '123'
-                    } else if (params.ACCOUNT == 'prod') {
-                        env.ACCOUNT_ID = '789'
-                    } else {
-                        error("Oops!! Invalid environment selected.")
-                    }
-                }
                 dir(params.ACCOUNT) {
                     sh './account.sh ${ACCOUNT_ID} ${REGION}'
-                }
-                
+                }    
             }
         }
         stage('Terraform Plan') {
