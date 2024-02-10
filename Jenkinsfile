@@ -29,6 +29,11 @@ pipeline {
                     sh "sh account.sh ${ACCOUNT_ID} ${REGION}"
                 }    
             }
+            post {
+                failure {
+                    error("Failed in 'Print Build Number' stage")
+                }
+            }
         }
         stage('Terraform Plan') {
             when {
