@@ -22,6 +22,19 @@ pipeline {
                 sh 'tfsec -m HIGH -s --no-colour && tfsec -m CRITICAL -s --no-colour'
             }
         }
+        stage('Setting AWS Credential') {
+            steps {
+                if (params.ENVIRONMENT == 'dev') {
+                    currentBuild.buildVariableResolver.addVariable("ACCOUNT_ID", "123")
+                } else if (params.ENVIRONMENT == 'prod') {
+                    currentBuild.buildVariableResolver.addVariable("ACCOUNT_ID", "789")
+                }
+            }
+            steps {
+                sh 'account.sh params.ACCOUNT_ID params.REGION'
+                echo "********ENVIRONMENT CREDENTIAL CONFIGURED********"
+            }
+        }
         stage('Terraform Plan') {
             when {
                 expression { params.TERRAFORM_ACTION == 'plan' }
