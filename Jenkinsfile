@@ -39,7 +39,7 @@ pipeline {
                     }
                 }
                 dir(params.ACCOUNT) {
-                    sh 'account.sh "${env.ACCOUNT_ID}" ${REGION}'
+                    sh 'account.sh env.ACCOUNT_ID ${REGION}'
                 }
                 
             }
