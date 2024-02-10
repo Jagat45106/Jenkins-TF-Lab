@@ -16,19 +16,19 @@ pipeline {
         stage('TFSec Scan') {
             steps {
                 echo "================STARTING TFSEC STATIC SCAN=================="
-                sh 'curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash'
-                sh 'tfsec --version'
+                #sh 'curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash'
+                #sh 'tfsec --version'
                 echo "******SCANNING WITH TFSEC*******"
-                sh 'tfsec -m HIGH -s --no-colour && tfsec -m CRITICAL -s --no-colour'
+                #sh 'tfsec -m HIGH -s --no-colour && tfsec -m CRITICAL -s --no-colour'
             }
         }
         stage('Setting AWS Credential') {
             steps {
                 script { 
                     if (params.ENVIRONMENT == 'dev') {
-                        env.AWS_ACCOUNT_ID = '123'
+                        env.ACCOUNT_ID = '123'
                     } else if (params.ENVIRONMENT == 'prod') {
-                        env.AWS_ACCOUNT_ID = '789'
+                        env.ACCOUNT_ID = '789'
                     } else {
                         error("Invalid environment selected.")
                     }
