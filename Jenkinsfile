@@ -16,10 +16,10 @@ pipeline {
         stage('TFSec Scan') {
             steps {
                 echo "================STARTING TFSEC STATIC SCAN=================="
-                #sh 'curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash'
-                #sh 'tfsec --version'
+                echo 'curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash'
+                echo 'tfsec --version'
                 echo "******SCANNING WITH TFSEC*******"
-                #sh 'tfsec -m HIGH -s --no-colour && tfsec -m CRITICAL -s --no-colour'
+                echo 'tfsec -m HIGH -s --no-colour && tfsec -m CRITICAL -s --no-colour'
             }
         }
         stage('Setting AWS Credential') {
