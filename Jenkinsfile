@@ -31,7 +31,7 @@ pipeline {
                     currentBuild.buildVariableResolver.addVariable("ACCOUNT_ID", "789")
                     }
                 }
-                sh 'account.sh params.ACCOUNT_ID params.REGION'
+                sh account.sh ${ACCOUNT_ID} ${REGION}
             }
         }
         stage('Terraform Plan') {
