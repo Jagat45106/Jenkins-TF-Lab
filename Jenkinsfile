@@ -29,11 +29,6 @@ pipeline {
                     sh "sh account.sh ${ACCOUNT_ID} ${REGION}"
                 }    
             }
-            post {
-                failure {
-                    error("Failed in 'Setting AWS Credential' stage")
-                }
-            }
         }
         stage('Terraform Plan') {
             when {
