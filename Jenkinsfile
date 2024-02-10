@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        // Define empty variable initially
+        ACCOUNT_ID = ""
+    }
+
     stages {
         stage('Workspace Cleanup') {
             steps {
@@ -33,7 +38,7 @@ pipeline {
                         error("Oops!! Invalid environment selected.")
                     }
                 }
-                sh './account.sh ${ACCOUNT_ID} ${REGION}'
+                sh './account.sh ${env.ACCOUNT_ID} ${REGION}'
             }
         }
         stage('Terraform Plan') {
