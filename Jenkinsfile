@@ -29,9 +29,11 @@ pipeline {
                         env.AWS_ACCOUNT_ID = '123'
                     } else if (params.ENVIRONMENT == 'prod') {
                         env.AWS_ACCOUNT_ID = '789'
+                    } else {
+                        error("Invalid environment selected.")
                     }
                 }
-                sh './account.sh ${ACCOUNT_ID} ${REGION}'
+                sh './account.sh $ACCOUNT_ID ${REGION}'
             }
         }
         stage('Terraform Plan') {
