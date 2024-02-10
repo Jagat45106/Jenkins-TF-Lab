@@ -38,7 +38,10 @@ pipeline {
                         error("Oops!! Invalid environment selected.")
                     }
                 }
-                sh 'account.sh ${env.ACCOUNT_ID} ${REGION}'
+                dir(params.ACCOUNT) {
+                    sh 'account.sh ${env.ACCOUNT_ID} ${REGION}'
+                }
+                
             }
         }
         stage('Terraform Plan') {
