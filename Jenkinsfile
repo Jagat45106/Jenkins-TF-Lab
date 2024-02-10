@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        // Define empty variable initially
-        ACCOUNT_ID = ""
-    }
-
     stages {
         stage('Workspace Cleanup') {
             steps {
