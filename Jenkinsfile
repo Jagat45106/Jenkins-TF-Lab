@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Setting AWS Credential') {
             steps {
-                dir(params.ACCOUNT) {
+                dir(accounts) {
                     sh 'chmod +x account.sh'
                     sh "sh account.sh ${ACCOUNT_ID} ${REGION}"
                 }    
