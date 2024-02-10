@@ -26,7 +26,7 @@ pipeline {
             steps {
                 dir(params.ACCOUNT) {
                     sh 'chmod +x account.sh'
-                    sh './account.sh ${params.ACCOUNT_ID} ${params.REGION}'
+                    sh "sh account.sh ${ACCOUNT_ID} ${REGION}"
                 }    
             }
         }
