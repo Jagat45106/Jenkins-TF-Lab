@@ -26,12 +26,12 @@ pipeline {
             steps {
                 script { 
                     if (params.ENVIRONMENT == 'dev') {
-                    currentBuild.buildVariableResolver.addVariable("ACCOUNT_ID", "123")
+                        env.AWS_ACCOUNT_ID = '123'
                     } else if (params.ENVIRONMENT == 'prod') {
-                    currentBuild.buildVariableResolver.addVariable("ACCOUNT_ID", "789")
+                        env.AWS_ACCOUNT_ID = '789'
                     }
                 }
-                sh 'account.sh ${ACCOUNT_ID} ${REGION}'
+                sh './account.sh $ACCOUNT_ID ${REGION}'
             }
         }
         stage('Terraform Plan') {
