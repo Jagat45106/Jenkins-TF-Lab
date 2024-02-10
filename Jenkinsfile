@@ -31,7 +31,7 @@ pipeline {
                         env.AWS_ACCOUNT_ID = '789'
                     }
                 }
-                sh './account.sh $ACCOUNT_ID ${REGION}'
+                sh './account.sh ${ACCOUNT_ID} ${REGION}'
             }
         }
         stage('Terraform Plan') {
